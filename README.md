@@ -26,6 +26,8 @@ A fully functional **Flutter E-Commerce application** using provider that fetche
 ## 📸 Screenshots
 
 
+![Untitled design (2)](https://github.com/user-attachments/assets/e136d07d-e802-41f8-ade3-3d98947cb904)
+
 
 ## 🙏 Acknowledgments
 
