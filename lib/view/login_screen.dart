@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:e_commerce_app/provider/cart_provider.dart';
 import 'package:e_commerce_app/provider/user_provider.dart';
 import 'package:e_commerce_app/view/HomeScreen.dart';
 import 'package:e_commerce_app/view/sign_up.dart';
@@ -7,8 +8,6 @@ import 'package:e_commerce_app/widgets/orangeBtn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:e_commerce_app/model/users_model.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -29,6 +28,7 @@ class LoginScreen extends StatelessWidget {
 
 
     final height = MediaQuery.of(context).size.height;
+    final cart = Provider.of<CartProvider>(context, listen: false);
     void handleLogin() async {
       final userProvider = Provider.of<UserProvider>(context, listen: false);
       if (!userProvider.isLoaded) {
@@ -47,9 +47,14 @@ class LoginScreen extends StatelessWidget {
       final user = userProvider.login(enteredPhone, enteredPass);
 
       if (user != null) {
+        cart.isLogin = true;
+        cart.setPrefsItems();
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(cart.isLogin.toString())),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

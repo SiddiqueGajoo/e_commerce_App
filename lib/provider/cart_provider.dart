@@ -11,6 +11,8 @@ class CartProvider with ChangeNotifier {
 
   double _totalPrice = 0.0;
   double get totalPrice => _totalPrice;
+  bool isLogin = false;
+  // bool get isLogin => _isLogin;
 
   late Future<List<CartModel>> _cart;
   Future<List<CartModel>> get cart => _cart;
@@ -24,22 +26,28 @@ class CartProvider with ChangeNotifier {
     _cart = db!.getCartList();
     return _cart;
   }
-
-
-
   void setPrefsItems() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt('cart_item', _counter);
     prefs.setDouble('total_price', _totalPrice);
+    prefs.setBool('isLogin',isLogin) ;
     notifyListeners();
   }
 
-  void getPrefsItems() async {
+  Future<void> getPrefsItems() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _counter = prefs.getInt('cart_item') ?? 0;
     _totalPrice = prefs.getDouble('total_price') ?? 0.0;
+    isLogin = prefs.getBool('isLogin') ?? false;
     notifyListeners();
   }
+  // void getPrefsItems() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   _counter = prefs.getInt('cart_item') ?? 0;
+  //   _totalPrice = prefs.getDouble('total_price') ?? 0.0;
+  //   _isLogin = prefs.getBool('isLogin') ?? false;
+  //   notifyListeners();
+  // }
 
   // Cart operations
   void addTotalPrice(double productPrice) {

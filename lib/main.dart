@@ -2,6 +2,7 @@ import 'package:e_commerce_app/provider/cart_provider.dart';
 import 'package:e_commerce_app/provider/product_provider.dart';
 import 'package:e_commerce_app/provider/user_provider.dart';
 import 'package:e_commerce_app/view/login_screen.dart';
+import 'package:e_commerce_app/view/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,6 @@ class MyApp extends StatelessWidget {
         color: Colors.white,
         title: 'Flutter Demo',
         theme: ThemeData(
-
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
           primaryColor: Colors.orange,
           primaryColorLight: Colors.white,
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
           useMaterial3: true,
         ),
-        home:LoginScreen()
+        home:SplashScreen()
       );
     }),);
   }
